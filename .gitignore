@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.db
+*.db-*
+.env
+*.jks
+google-services.json
+local.properties
+build/
+*.egg-info/

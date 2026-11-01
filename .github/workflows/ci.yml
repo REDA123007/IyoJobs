@@ -1,0 +1,17 @@
+name: Verify
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install -r requirements-dev.lock
+      - run: python -m pytest -q
+      - run: pip-audit -r requirements.lock
+      - run: docker build -t talent-atlas:test .
+# Intentionally no deployment job. Production requires explicit owner approval.
