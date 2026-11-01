@@ -1,0 +1,71 @@
+/*
+  IyoJobs design tokens.
+  Brand colors are sampled from the supplied logo: green #023B00 and orange #FF5925.
+  Contrast ratios are verified by src/test/contrast.test.ts, which reads this file.
+  Rule of thumb that follows from the measurements:
+    - Logo orange on white is only 3.13:1 → decorative use and large text only, never body text.
+    - Text that must be orange uses --color-accent-700 (5.43:1 on the page background).
+    - Primary buttons are deep green with white text (12.9:1).
+*/
+:root {
+  /* Brand */
+  --color-brand-900: #023b00; /* logo background green */
+  --color-brand-700: #1f6b1a; /* green text/links on light surfaces */
+  --color-brand-100: #e6f2e1; /* mint surface */
+  --color-brand-50: #f2f8ef;
+  --color-accent-500: #ff5925; /* logo orange: decoration and large text only */
+  --color-accent-700: #b93a0f; /* orange for normal-size text */
+  --color-accent-100: #ffe9e0;
+  --color-sun-200: #fde68a; /* warm detail */
+  --color-sky-100: #e0f2fe; /* info surface */
+
+  /* Neutrals */
+  --color-bg: #f7faf5;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-border: #d5e0d0;
+  --color-border-strong: #7f8f7a;
+
+  /* Feedback (always paired with an icon and a text label, never color alone) */
+  --color-danger-700: #b42318;
+  --color-danger-100: #fee4e2;
+
+  /* Typography: Latin and Cyrillic fall to IBM Plex Sans, Arabic to IBM Plex Sans Arabic */
+  --font-sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-sm: 0.9rem;
+  --text-base: 1rem;
+  --text-lg: 1.15rem;
+  --text-xl: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+  --text-hero: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+  --leading: 1.65;
+
+  /* Space and shape */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.5rem;
+  --shadow-card: 0 1px 2px rgb(2 59 0 / 0.06), 0 6px 20px rgb(2 59 0 / 0.07);
+  --touch-target: 2.75rem; /* 44px minimum */
+  --content-width: 72rem;
+
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 5px var(--color-brand-900);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0s;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --motion: 0.18s;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  // STAGING ONLY. Production has a separate config and a separate, manually approved workflow.
+  // Not deployed yet: no Cloudflare authorization has been given to this project.
+  "name": "iyojobs-web-staging",
+  "compatibility_date": "2026-10-30",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
