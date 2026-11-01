@@ -22,3 +22,25 @@ Production remains blocked on SECURITY.md requirements and the owner's explicit 
 
 The local source export has an independently initialized Git history because the host credential helper could not authenticate Git transport. To continue with shared history, clone the GitHub repository through an authenticated client; do not force-push the local export over remote main.
 
+
+
+## Update — Stage 3 (web foundation), 2026-11-01
+
+Verified in this session (not just claimed):
+- Backend: 10 pytest tests pass locally (re-run from a clean clone).
+- Web (`web/`): 102 tests pass (unit, component, axe accessibility in 7 languages, and a contract test against the real running Python API); `tsc --noEmit` and `vite build` pass; `npm audit --omit=dev` reports 0 vulnerabilities.
+- Not tested: real browsers (no Playwright E2E yet), mobile/desktop viewport rendering, real colour contrast in a browser (token-level contrast is tested), screen readers, any deployed environment. No preview is deployed.
+
+Findings from the audit that remain OPEN (confirmed in code):
+- Message/notification/list ordering is wrong (random-hex IDs + one-second timestamps).
+- Rate limiter is keyed by client host only and process-local; none on messages/jobs/companies.
+- scrypt parameters are below current OWASP guidance and carry no version for upgrades.
+- Arabic prefixed words are not matched by skill extraction; SQLite `lower()` is ASCII-only (e.g. `lower('ÉCOLE')` gives `École`).
+- Registration reveals whether an email exists (409).
+- Session token is returned in JSON; a web client needs HttpOnly cookie + CSRF instead of storing it.
+- No `/v1` prefix, no migrations, no job-detail endpoint, no date/source/eligibility/"global" fields, no saved jobs, alerts or account recovery.
+- Branding in code/docs still says "Talent Atlas".
+
+Repository visibility: the tooling in this session could clone the repository anonymously, i.e. it appeared PUBLIC although AGENTS.md requires private. Verify in GitHub → Settings. (Changing it is the owner's decision.)
+
+Web UI honesty rules: no invented users, ratings or counts; unfinished features are labelled "In development"/"Planned"; translations are drafts needing native review.
